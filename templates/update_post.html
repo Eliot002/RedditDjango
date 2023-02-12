@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Edit Blog Post{% endblock %}
+{% block body_content %}
+    <div class="col p-4 d-flex flex-column position-static bg-light rounded">
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <h1>Update Post</h1>
+                <br>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary">Post</button>
+                </form>
+            {% else %}
+                Tu n'as pas le droit d'être là et tu le sais très bien!
+            {% endif %}
+        {% else %}
+            Tu n'as pas le droit d'être là et tu le sais très bien!
+        {% endif %}
+    </div>
+{% endblock %}
